@@ -474,8 +474,8 @@ José Antonio López Gómez
 </div>
 </div>
 </section>
-<section id="mi-primer-gráfico" class="slide level2 smaller">
-<h2>Mi primer gráfico</h2>
+<section id="scatterplot" class="slide level2 smaller">
+<h2>Scatterplot</h2>
 <p>Vamos a representar carat (quilates) vs price</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
@@ -491,8 +491,8 @@ José Antonio López Gómez
 </div>
 </div>
 </section>
-<section id="mi-primer-gráfico-1" class="slide level2 smaller">
-<h2>Mi primer gráfico</h2>
+<section id="scatterplot-1" class="slide level2 smaller">
+<h2>Scatterplot</h2>
 <p>Añadimos un tema y cambiamos el color de los puntos</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
@@ -509,8 +509,8 @@ José Antonio López Gómez
 </div>
 </div>
 </section>
-<section id="mi-primer-gráfico-2" class="slide level2 smaller">
-<h2>Mi primer gráfico</h2>
+<section id="scatterplot-2" class="slide level2 smaller">
+<h2>Scatterplot</h2>
 <p>Coloreamos los puntos agrupados por la variable cut. Además movemos la leyenda a la parte superior</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
@@ -528,8 +528,8 @@ José Antonio López Gómez
 </div>
 </div>
 </section>
-<section id="mi-primer-gráfico-3" class="slide level2 smaller">
-<h2>Mi primer gráfico</h2>
+<section id="scatterplot-3" class="slide level2 smaller">
+<h2>Scatterplot</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> cut)) <span class="sc">+</span></span>
@@ -620,19 +620,106 @@ José Antonio López Gómez
 </div>
 </div>
 </section>
-<section id="boxplot-4" class="slide level2 smaller">
-<h2>Boxplot</h2>
+<section id="histogram" class="slide level2 smaller">
+<h2>Histogram</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> color, <span class="at">y =</span> price)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href=""></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> cut), <span class="at">color =</span> <span class="st">'navy'</span>) <span class="sc">+</span></span>
-<span id="cb13-3"><a href=""></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb13-4"><a href=""></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'top'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href=""></a>    <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">'navy'</span>, <span class="at">fill =</span> <span class="st">'steelblue'</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
 <p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="histogram-1" class="slide level2 smaller">
+<h2>Histogram</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href=""></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">color =</span> color), <span class="at">fill =</span> <span class="st">'white'</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bar-chart" class="slide level2 smaller">
+<h2>Bar Chart</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> clarity)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href=""></a>    <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">'navy'</span>, <span class="at">fill =</span> <span class="st">'white'</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bar-chart-1" class="slide level2 smaller">
+<h2>Bar Chart</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> clarity)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href=""></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">color =</span> cut, <span class="at">fill =</span> cut)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href=""></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href=""></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'top'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bar-chart-2" class="slide level2 smaller">
+<h2>Bar Chart</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> clarity)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href=""></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">color =</span> cut, <span class="at">fill =</span> cut), <span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
+<span id="cb17-3"><a href=""></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb17-4"><a href=""></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'top'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pie-chart" class="slide level2 smaller">
+<h2>Pie Chart</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">''</span>, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href=""></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> clarity), <span class="at">stat =</span> <span class="st">'identity'</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href=""></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href=""></a>    <span class="fu">coord_polar</span>(<span class="st">'y'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
 </figure>
 </div>
 </div>

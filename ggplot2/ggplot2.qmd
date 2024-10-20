@@ -56,7 +56,7 @@ library('ggplot2')
 df <- diamonds
 summary(df)
 ```
-## Mi primer gráfico {.smaller}
+## Scatterplot {.smaller}
 Vamos a representar carat (quilates) vs price
 
 ```{r}
@@ -66,7 +66,7 @@ Vamos a representar carat (quilates) vs price
 ggplot(df, aes(x = carat, y = price)) +
     geom_point()
 ```
-## Mi primer gráfico {.smaller}
+## Scatterplot  {.smaller}
 Añadimos un tema y cambiamos el color de los puntos
 
 ```{r}
@@ -77,7 +77,7 @@ ggplot(df, aes(x = carat, y = price)) +
     geom_point(color = 'steelblue') +
     theme_bw()
 ```
-## Mi primer gráfico {.smaller}
+## Scatterplot  {.smaller}
 Coloreamos los puntos agrupados por la variable cut. Además movemos la leyenda a la parte superior 
 
 ```{r}
@@ -89,7 +89,7 @@ ggplot(df, aes(x = carat, y = price)) +
     theme_bw() +
     theme(legend.position = 'top')
 ```
-## Mi primer gráfico {.smaller}
+## Scatterplot  {.smaller}
 
 ```{r}
 #| echo: true
@@ -145,13 +145,64 @@ ggplot(df, aes(x = cut, y = price)) +
     theme(legend.position = 'top') +
     facet_wrap(~ color)
 ```
-## Boxplot {.smaller}
+## Histogram {.smaller}
 ```{r}
 #| echo: true
 #| output-location: fragment
 
-ggplot(df, aes(x = color, y = price)) +
-    geom_boxplot(aes(fill = cut), color = 'navy') +
+ggplot(df, aes(x = price)) +
+    geom_histogram(color = 'navy', fill = 'steelblue') +
+    theme_bw()
+```
+## Histogram {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = price)) +
+    geom_histogram(aes(color = color), fill = 'white') +
+    theme_bw()
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity)) +
+    geom_bar(color = 'navy', fill = 'white') +
+    theme_bw()
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity)) +
+    geom_bar(aes(color = cut, fill = cut)) +
     theme_bw() +
     theme(legend.position = 'top')
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity)) +
+    geom_bar(aes(color = cut, fill = cut), position = position_dodge()) +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+## Pie Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = '', y = price)) +
+    geom_bar(aes(fill = clarity), stat = 'identity') +
+    theme_bw() +
+    coord_polar('y')
 ```
