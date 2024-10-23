@@ -72,9 +72,18 @@ saludo <- "¡Hola Mundo!"
 
 saludo
 ```
+## Usando funciones
+##### - head()
+Para ilustrar el uso de la función **head()** utilizaremos el dataset [*iris*](https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris) que viene con la instalación de **R-Base**.
+```{r}
+#| echo: true
+#| output-location: fragment
+df <- iris
 
+head(df)
+```
 
-## "Usando funciones"
+## Usando funciones
 ##### - pairs()
 Para ilustrar el uso de la función [**pairs()**](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pairs) utilizaremos el dataset [*iris*](https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris) que viene con la instalación de **R-Base**.
 ```{r}
@@ -84,16 +93,7 @@ df <- iris
 
 pairs(df, col = df$Species)
 ```
-## "Usando funciones"
-##### - head()
-Para ilustrar el uso de la función [**pairs()**](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pairs) utilizaremos el dataset [*iris*](https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris) que viene con la instalación de **R-Base**.
-```{r}
-#| echo: true
-#| output-location: fragment
-df <- iris
 
-head(df)
-```
 ## Estructuras de control de flujo {.smaller}
 Se llaman estructuras de control de flujo a las instrucciones que permiten controlar las acciones de un algoritmo o programa. Estas son de gran utilidad para determinar la lógica y el orden en que ocurren las operaciones.
 
@@ -399,4 +399,149 @@ aggregate(df[, c(1:4)], by = list(Species = df$Species), FUN = mean)
 #| echo: true
 #| output-location: fragment
 aggregate(df[, c(1:4)], by = list(Species = df$Species), FUN = sd)
+```
+## Drosophila melanogaster {.smaller}
+Vamos a realizar un análisis de expresíon diferencial  con el conjunto de datos *modencodefly* de la Drosophila melanogaster.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df <- read.csv('data/modencodefly_count_table.csv')
+
+dim(df)
+
+head(df)
+```
+
+## Metadatos {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+phenodata <- read.csv('data/modencodefly_phenodata.csv')
+dim(phenodata)
+
+head(phenodata, 10)
+```
+
+## Fenotipos seleccionados {.smaller}
+Queremos seleccionar las muestras que corresponden con el stage 'L1Larvae' y 'L2Larvae'.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+fenotipos <- c('L1Larvae', 'L2Larvae')
+
+df.fenotipos <- phenodata[phenodata$stage %in% fenotipos, c('sample.id', 'stage')]
+
+df.fenotipos$stage <- as.factor(df.fenotipos$stage)
+
+df.fenotipos
+```
+## Filtrar el dataset por las muestras seleccionadas {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+head(names(df), 15)
+```
+. . .
+```{r}
+#| echo: true
+#| output-location: fragment
+head(names(df) %in% df.fenotipos$sample.id, 15)
+```
+. . .
+```{r}
+#| echo: true
+#| output-location: fragment
+df.sub <- df[, names(df) %in% df.fenotipos$sample.id]
+
+head(df.sub)
+```
+
+## Añadir genes {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+rownames(df.sub) <- df$gene
+
+head(df.sub)
+```
+## Eliminar genes con pocas counts {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+head(rowSums(df.sub))
+```
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+keep <- rowSums(df.sub) >= 10
+head(keep)
+```
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df.sub  <- df.sub [keep, ]
+head(df.sub)
+dim(df.sub)
+```
+## DESeq2 {.smaller}
+Para el análisis de expresión diferencial vamos a utilizar el paquete [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html).
+
+Vignettes: [Analyzing RNA-seq data with DESeq2](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+
+```{.r}
+install.packages("BiocManager")
+```
+. . .
+
+```{.r}
+BiocManager::install("DESeq2")
+```
+## DESeq2 {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+library(DESeq2)
+coldata <- data.frame(stage = df.fenotipos$stage)
+rownames(coldata) <- df.fenotipos$sample.id
+head(coldata)
+```
+. . .
+```{r}
+#| echo: true
+#| output-location: fragment
+dds <- DESeqDataSetFromMatrix(
+                    countData = df.sub,
+                    colData = coldata,
+                    design = ~stage
+            )
+
+dds
+```
+## DESeq2 {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+dds <- DESeq(dds)
+dds
+```
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+res <- results(dds, contrast = c('stage', 'L1Larvae', 'L2Larvae'))
+res
+```
+## Guardar resultados {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+write.csv(res, 'data/DGE.csv')
 ```

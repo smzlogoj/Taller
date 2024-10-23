@@ -482,32 +482,13 @@ José Antonio López Gómez
 </div></div>
 </section>
 <section id="usando-funciones" class="slide level2">
-<h2>“Usando funciones”</h2>
-<h5 id="pairs">- pairs()</h5>
-<p>Para ilustrar el uso de la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pairs"><strong>pairs()</strong></a> utilizaremos el dataset <a href="https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris"><em>iris</em></a> que viene con la instalación de <strong>R-Base</strong>.</p>
-<div class="cell columns column-output-location">
-<div class="column">
+<h2>Usando funciones</h2>
+<h5 id="head">- head()</h5>
+<p>Para ilustrar el uso de la función <strong>head()</strong> utilizaremos el dataset <a href="https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris"><em>iris</em></a> que viene con la instalación de <strong>R-Base</strong>.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>df <span class="ot">&lt;-</span> iris</span>
 <span id="cb3-2"><a href=""></a></span>
-<span id="cb3-3"><a href=""></a><span class="fu">pairs</span>(df, <span class="at">col =</span> df<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="usaR_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></div>
-</section>
-<section id="usando-funciones-1" class="slide level2">
-<h2>“Usando funciones”</h2>
-<h5 id="head">- head()</h5>
-<p>Para ilustrar el uso de la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pairs"><strong>pairs()</strong></a> utilizaremos el dataset <a href="https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris"><em>iris</em></a> que viene con la instalación de <strong>R-Base</strong>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>df <span class="ot">&lt;-</span> iris</span>
-<span id="cb4-2"><a href=""></a></span>
-<span id="cb4-3"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -520,6 +501,25 @@ José Antonio López Gómez
 6          5.4         3.9          1.7         0.4  setosa</code></pre>
 </div>
 </div>
+</section>
+<section id="usando-funciones-1" class="slide level2">
+<h2>Usando funciones</h2>
+<h5 id="pairs">- pairs()</h5>
+<p>Para ilustrar el uso de la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pairs"><strong>pairs()</strong></a> utilizaremos el dataset <a href="https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris"><em>iris</em></a> que viene con la instalación de <strong>R-Base</strong>.</p>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>df <span class="ot">&lt;-</span> iris</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a><span class="fu">pairs</span>(df, <span class="at">col =</span> df<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="usaR_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></div>
 </section>
 <section id="estructuras-de-control-de-flujo" class="slide level2 smaller">
 <h2>Estructuras de control de flujo</h2>
@@ -843,12 +843,12 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 720.93505 195.60776 123.21583 654.00504 469.16439  76.04556 656.06495
- [8] 299.83769 392.30086 121.66264</code></pre>
+<pre><code> [1] 178.7909 466.1300 466.7088 422.3071 949.2946 755.7930 506.4649 672.3373
+ [9] 413.5967 421.4734</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a>numeros[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 720.9351 469.1644 121.6626</code></pre>
+<pre><code>[1] 178.7909 949.2946 421.4734</code></pre>
 </div>
 </div>
 <ul>
@@ -859,7 +859,7 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 195.60776 123.21583 469.16439  76.04556 299.83769 392.30086 121.66264</code></pre>
+<pre><code>[1] 178.7909 466.1300 466.7088 422.3071 413.5967 421.4734</code></pre>
 </div>
 </div>
 </section>
@@ -1140,10 +1140,480 @@ José Antonio López Gómez
 3  virginica    0.6358796   0.3224966    0.5518947   0.2746501</code></pre>
 </div>
 </div>
+</div>
+</section>
+<section id="drosophila-melanogaster" class="slide level2 smaller">
+<h2>Drosophila melanogaster</h2>
+<p>Vamos a realizar un análisis de expresíon diferencial con el conjunto de datos <em>modencodefly</em> de la Drosophila melanogaster.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'data/modencodefly_count_table.csv'</span>)</span>
+<span id="cb104-2"><a href=""></a></span>
+<span id="cb104-3"><a href=""></a><span class="fu">dim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14869   148</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href=""></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         gene SRX007811 SRX008180 SRX008227 SRX008238 SRX008258 SRX008015
+1 FBgn0000003         0         0         0         0         0         0
+2 FBgn0000008      3903      1601       681       648       718       921
+3 FBgn0000014        75        29        10         9        12       563
+4 FBgn0000015        33        11         8         4         8       235
+5 FBgn0000017      9763      4107      1814      1652      1788      6358
+6 FBgn0000018       832       368       146       126       170        97
+  SRX008179 SRX008190 SRX008193 SRX008271 SRX008027 SRX008181 SRX008217
+1         0         0         0         0         0         0         0
+2       295       364       268       267      1764       411       284
+3       186       239       152       191      4890       957       806
+4        95       101        58       101      3000       590       492
+5      2214      2763      1906      2053      6006      1252       904
+6        33        55        25        22       339        57        60
+  SRX008250 SRX008265 SRX008025 SRX008175 SRX008210 SRX008212 SRX008257
+1         0         0         0         0         0         0         0
+2       396       706      1074       563       156       160       440
+3      1036      1956      6147      3166       956      1053      2876
+4       715      1185      2492      1228       340       458      1174
+5      1244      2456      5030      2584       746       847      2105
+6        71       116       178        95        34        35        75
+  SRX008010 SRX008249 SRX008252 SRX008273 SRX008274 SRX008005 SRX008198
+1         0         0         0         0         0         0         0
+2      1557       874       904       632       234      4488      1222
+3      5160      3270      2836      2048       815      4792      1390
+4      1986      1454      1138       788       324      1709       541
+5      5350      3101      3046      2343       969      8695      2448
+6       130        99        75        56        25       141        43
+  SRX008208 SRX008243 SRX008247 SRX008018 SRX008177 SRX008225 SRX008235
+1         0         0         0         0         0         0         0
+2       825      3030      1224      8755      2431      1718      5478
+3       883      3102      1192      9943      2536      1890      5782
+4       370      1076       431      3421       886       744      1942
+5      1518      5540      2345     12295      3296      2440      7652
+6        25        97        34       229        59        50       113
+  SRX008277 SRX008007 SRX008196 SRX008233 SRX008237 SRX008262 SRX008006
+1         0         0         0         0         0         0         0
+2      2212      5617      1039      2769      1716      1664      1749
+3      2559      5134       935      2339      1404      1426      2908
+4       985      1313       240       645       392       419      1024
+5      3125      9374      1816      4564      2640      2853      4548
+6        48       122        19        67        27        44        93
+  SRX008178 SRX008205 SRX008242 SRX008278 SRX008020 SRX008213 SRX008215
+1         0         0         0         0         0         0         0
+2      1532       549       715       390      1685       384      1397
+3      2602       965      1116       638      2333       543      1832
+4       845       321       398       216       914       199       667
+5      4156      1537      1816      1085      2577       572      2010
+6        57        20        23        10        42        18        31
+  SRX008222 SRX008259 SRX008011 SRX008214 SRX008221 SRX008241 SRX008256
+1         0         0         0         0         0         0         0
+2       407      2141      1036       417       353       560       394
+3       512      3101      1068       448       338       589       475
+4       217      1153       419       165       139       219       179
+5       526      3328      3327      1425      1046      1719      1342
+6        12        72        35        16        11        15        15
+  SRX008019 SRX008167 SRX008234 SRX008251 SRX008266 SRX008026 SRX008174
+1         0         0         0         0         0         0         0
+2      2548       730       687       786       587       928       392
+3      3090       979       819      1008       810      1845       796
+4      1306       404       334       450       310       635       295
+5      6979      1985      1843      2297      1539      1440       670
+6       113        33        26        39        23       150        64
+  SRX008201 SRX008239 SRX008008 SRX008168 SRX008211 SRX008255 SRX008261
+1         0         0         0         0         0         0         0
+2       575       851      1696       353       284       733       258
+3      1203      1740      2030       422       375       914       296
+4       485       617       695       155       130       350        95
+5      1021      1330      2360       481       434      1054       381
+6       102       139       371        94        66       162        49
+  SRX008009 SRX008194 SRX008207 SRX008224 SRX008244 SRX008029 SRX008184
+1         0         0         0         0         0         0         0
+2       311        94       108       110       148       228        74
+3       536       182       211       196       296       535       181
+4       190        71        70        81       111       127        56
+5       481       154       197       197       292       667       226
+6        83        29        27        35        48       131        63
+  SRX008206 SRX008220 SRX008267 SRX008014 SRX008182 SRX008187 SRX008189
+1         0         0         0         0         0         0         0
+2       115        77        74       393       541       168       161
+3       278       212       173       822      1342       360       434
+4        62        56        44       166       324        82        95
+5       357       242       216      1036      1416       490       452
+6        82        48        57       107       167        44        57
+  SRX008200 SRX008156 SRX008199 SRX008245 SRX008253 SRX008023 SRX008218
+1         0         0         0         0         0         0         0
+2       163      1205      2939       945      1022      3602       926
+3       398      1598      3795      1136      1349      3227       836
+4       103       389      1029       322       338       470       134
+5       423      1791      4400      1395      1484      5073      1312
+6        39       154       334        94       124       307        78
+  SRX008246 SRX008248 SRX008275 SRX008016 SRX008192 SRX008219 SRX008236
+1         0         0         0         0         0         0         0
+2      2209      1494      1076      4011      1233      1758      2123
+3      1903      1231       878      2698       885      1115      1577
+4       287       201       130       529       192       229       325
+5      3019      1972      1521      5793      1860      2517      3176
+6       178       105        80       274        95       128       156
+  SRX008264 SRX008013 SRX008188 SRX008197 SRX008228 SRX008022 SRX008183
+1         0         0         0         0         0         0         0
+2      2023      1117      1004      1447      1452       665       396
+3      1488       282       286       355       379        61        44
+4       316        99        87       153       101        17        19
+5      2960      2356      2159      3069      3182      2170      1317
+6       148       264       247       320       333       218       149
+  SRX008185 SRX008216 SRX012269 SRX008024 SRX008173 SRX008195 SRX008202
+1         0         0         0         0         0         0         0
+2       686       409      1011       603       336       380       431
+3        64        36        72        39        35        40        36
+4        17        15        20        15        17        20         8
+5      2252      1426      3357      1906      1123      1239      1551
+6       220       137       343       194       138       164       143
+  SRX008254 SRX012270 SRX008012 SRX008170 SRX008263 SRX008268 SRX016332
+1         0         0         0         0         0         0         0
+2       437       738       717       630       389       303       373
+3        29        54       340       307       195       148       222
+4        10        12       256       270       165       116       142
+5      1410      2504      1388      1279       790       579       849
+6       136       224       170       186       107        76       108
+  SRX008028 SRX008191 SRX008223 SRX008260 SRX008021 SRX008203 SRX008226
+1         0         0         0         0         0         0         0
+2      1234      1112       989      1026       430       200       158
+3       309       298       243       281       137        75        47
+4       347       292       305       328       167       118        70
+5      2007      1837      1596      1644       898       461       341
+6       319       280       251       308       154        98        54
+  SRX008229 SRX008232 SRX012271 SRX008171 SRX008186 SRX008240 SRX010758
+1         0         0         0         0         0         0         0
+2       430       250      1074      3386      6313      3210      4811
+3       132        74       339       647      1310       632       939
+4       177        98       322       202       375       203       259
+5       777       504      2100      2759      5211      2524      3931
+6       137        71       332       128       263        96       165
+  SRX016331 SRX008155 SRX008169 SRX008172 SRX008231 SRX008542 SRX008017
+1         0         0         0         0         0         0         0
+2      3803      2393      1834      1890       744       952       971
+3       751       572       404       440       156       212       307
+4       219       252       183       210        76        81       146
+5      3212      2584      2013      2156       809       963      1168
+6       117       216       142       143        47        65       134
+  SRX008209 SRX008230 SRX008270 SRX008157 SRX008204 SRX008269 SRX008272
+1         0         0         0         0         0         0         0
+2       844      1204       620      1519      1267      1448      1185
+3       253       371       159      1841      1650      1875      1370
+4       146       168        93       340       332       368       261
+5      1085      1513       782      1973      1592      1833      1465
+6       124       146        82       101       112       116       102
+  SRX008276
+1         0
+2      3225
+3      4048
+4       711
+5      4066
+6       294</code></pre>
+</div>
+</div>
+</section>
+<section id="metadatos" class="slide level2 smaller">
+<h2>Metadatos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href=""></a>phenodata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'data/modencodefly_phenodata.csv'</span>)</span>
+<span id="cb108-2"><a href=""></a><span class="fu">dim</span>(phenodata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 147   3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href=""></a><span class="fu">head</span>(phenodata, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   sample.id num.tech.reps       stage
+1  SRX007811             5 Embryos0002
+2  SRX008180             2 Embryos0002
+3  SRX008227             1 Embryos0002
+4  SRX008238             1 Embryos0002
+5  SRX008258             1 Embryos0002
+6  SRX008015             2 Embryos0204
+7  SRX008179             1 Embryos0204
+8  SRX008190             1 Embryos0204
+9  SRX008193             1 Embryos0204
+10 SRX008271             1 Embryos0204</code></pre>
+</div>
+</div>
+</section>
+<section id="fenotipos-seleccionados" class="slide level2 smaller">
+<h2>Fenotipos seleccionados</h2>
+<p>Queremos seleccionar las muestras que corresponden con el stage ‘L1Larvae’ y ‘L2Larvae’.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href=""></a>fenotipos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'L1Larvae'</span>, <span class="st">'L2Larvae'</span>)</span>
+<span id="cb112-2"><a href=""></a></span>
+<span id="cb112-3"><a href=""></a>df.fenotipos <span class="ot">&lt;-</span> phenodata[phenodata<span class="sc">$</span>stage <span class="sc">%in%</span> fenotipos, <span class="fu">c</span>(<span class="st">'sample.id'</span>, <span class="st">'stage'</span>)]</span>
+<span id="cb112-4"><a href=""></a></span>
+<span id="cb112-5"><a href=""></a>df.fenotipos<span class="sc">$</span>stage <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df.fenotipos<span class="sc">$</span>stage)</span>
+<span id="cb112-6"><a href=""></a></span>
+<span id="cb112-7"><a href=""></a>df.fenotipos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>   sample.id    stage
+61 SRX008026 L1Larvae
+62 SRX008174 L1Larvae
+63 SRX008201 L1Larvae
+64 SRX008239 L1Larvae
+65 SRX008008 L2Larvae
+66 SRX008168 L2Larvae
+67 SRX008211 L2Larvae
+68 SRX008255 L2Larvae
+69 SRX008261 L2Larvae</code></pre>
+</div>
+</div>
+</section>
+<section id="filtrar-el-dataset-por-las-muestras-seleccionadas" class="slide level2 smaller">
+<h2>Filtrar el dataset por las muestras seleccionadas</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href=""></a><span class="fu">head</span>(<span class="fu">names</span>(df), <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "gene"      "SRX007811" "SRX008180" "SRX008227" "SRX008238" "SRX008258"
+ [7] "SRX008015" "SRX008179" "SRX008190" "SRX008193" "SRX008271" "SRX008027"
+[13] "SRX008181" "SRX008217" "SRX008250"</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href=""></a><span class="fu">head</span>(<span class="fu">names</span>(df) <span class="sc">%in%</span> df.fenotipos<span class="sc">$</span>sample.id, <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href=""></a>df.sub <span class="ot">&lt;-</span> df[, <span class="fu">names</span>(df) <span class="sc">%in%</span> df.fenotipos<span class="sc">$</span>sample.id]</span>
+<span id="cb118-2"><a href=""></a></span>
+<span id="cb118-3"><a href=""></a><span class="fu">head</span>(df.sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>  SRX008026 SRX008174 SRX008201 SRX008239 SRX008008 SRX008168 SRX008211
+1         0         0         0         0         0         0         0
+2       928       392       575       851      1696       353       284
+3      1845       796      1203      1740      2030       422       375
+4       635       295       485       617       695       155       130
+5      1440       670      1021      1330      2360       481       434
+6       150        64       102       139       371        94        66
+  SRX008255 SRX008261
+1         0         0
+2       733       258
+3       914       296
+4       350        95
+5      1054       381
+6       162        49</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="añadir-genes" class="slide level2 smaller">
+<h2>Añadir genes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href=""></a><span class="fu">rownames</span>(df.sub) <span class="ot">&lt;-</span> df<span class="sc">$</span>gene</span>
+<span id="cb120-2"><a href=""></a></span>
+<span id="cb120-3"><a href=""></a><span class="fu">head</span>(df.sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>            SRX008026 SRX008174 SRX008201 SRX008239 SRX008008 SRX008168
+FBgn0000003         0         0         0         0         0         0
+FBgn0000008       928       392       575       851      1696       353
+FBgn0000014      1845       796      1203      1740      2030       422
+FBgn0000015       635       295       485       617       695       155
+FBgn0000017      1440       670      1021      1330      2360       481
+FBgn0000018       150        64       102       139       371        94
+            SRX008211 SRX008255 SRX008261
+FBgn0000003         0         0         0
+FBgn0000008       284       733       258
+FBgn0000014       375       914       296
+FBgn0000015       130       350        95
+FBgn0000017       434      1054       381
+FBgn0000018        66       162        49</code></pre>
+</div>
+</div>
+</section>
+<section id="eliminar-genes-con-pocas-counts" class="slide level2 smaller">
+<h2>Eliminar genes con pocas counts</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href=""></a><span class="fu">head</span>(<span class="fu">rowSums</span>(df.sub))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>FBgn0000003 FBgn0000008 FBgn0000014 FBgn0000015 FBgn0000017 FBgn0000018 
+          0        6070        9621        3457        9171        1197 </code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href=""></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(df.sub) <span class="sc">&gt;=</span> <span class="dv">10</span></span>
+<span id="cb124-2"><a href=""></a><span class="fu">head</span>(keep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>FBgn0000003 FBgn0000008 FBgn0000014 FBgn0000015 FBgn0000017 FBgn0000018 
+      FALSE        TRUE        TRUE        TRUE        TRUE        TRUE </code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href=""></a>df.sub  <span class="ot">&lt;-</span> df.sub [keep, ]</span>
+<span id="cb126-2"><a href=""></a><span class="fu">head</span>(df.sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>            SRX008026 SRX008174 SRX008201 SRX008239 SRX008008 SRX008168
+FBgn0000008       928       392       575       851      1696       353
+FBgn0000014      1845       796      1203      1740      2030       422
+FBgn0000015       635       295       485       617       695       155
+FBgn0000017      1440       670      1021      1330      2360       481
+FBgn0000018       150        64       102       139       371        94
+FBgn0000024      1797       707      1126      1498      1701       341
+            SRX008211 SRX008255 SRX008261
+FBgn0000008       284       733       258
+FBgn0000014       375       914       296
+FBgn0000015       130       350        95
+FBgn0000017       434      1054       381
+FBgn0000018        66       162        49
+FBgn0000024       334       791       235</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href=""></a><span class="fu">dim</span>(df.sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11342     9</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="deseq2" class="slide level2 smaller">
+<h2>DESeq2</h2>
+<p>Para el análisis de expresión diferencial vamos a utilizar el paquete <a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a>.</p>
+<p>Vignettes: <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">Analyzing RNA-seq data with DESeq2</a></p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href=""></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"DESeq2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="deseq2-1" class="slide level2 smaller">
+<h2>DESeq2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href=""></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb132-2"><a href=""></a>coldata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">stage =</span> df.fenotipos<span class="sc">$</span>stage)</span>
+<span id="cb132-3"><a href=""></a><span class="fu">rownames</span>(coldata) <span class="ot">&lt;-</span> df.fenotipos<span class="sc">$</span>sample.id</span>
+<span id="cb132-4"><a href=""></a><span class="fu">head</span>(coldata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>             stage
+SRX008026 L1Larvae
+SRX008174 L1Larvae
+SRX008201 L1Larvae
+SRX008239 L1Larvae
+SRX008008 L2Larvae
+SRX008168 L2Larvae</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href=""></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
+<span id="cb134-2"><a href=""></a>                    <span class="at">countData =</span> df.sub,</span>
+<span id="cb134-3"><a href=""></a>                    <span class="at">colData =</span> coldata,</span>
+<span id="cb134-4"><a href=""></a>                    <span class="at">design =</span> <span class="sc">~</span>stage</span>
+<span id="cb134-5"><a href=""></a>            )</span>
+<span id="cb134-6"><a href=""></a></span>
+<span id="cb134-7"><a href=""></a>dds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>class: DESeqDataSet 
+dim: 11342 9 
+metadata(1): version
+assays(1): counts
+rownames(11342): FBgn0000008 FBgn0000014 ... FBgn0261574 FBgn0261575
+rowData names(0):
+colnames(9): SRX008026 SRX008174 ... SRX008255 SRX008261
+colData names(1): stage</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="deseq2-2" class="slide level2 smaller">
+<h2>DESeq2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href=""></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span>
+<span id="cb136-2"><a href=""></a>dds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>class: DESeqDataSet 
+dim: 11342 9 
+metadata(1): version
+assays(4): counts mu H cooks
+rownames(11342): FBgn0000008 FBgn0000014 ... FBgn0261574 FBgn0261575
+rowData names(22): baseMean baseVar ... deviance maxCooks
+colnames(9): SRX008026 SRX008174 ... SRX008255 SRX008261
+colData names(2): stage sizeFactor</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">results</span>(dds, <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">'stage'</span>, <span class="st">'L1Larvae'</span>, <span class="st">'L2Larvae'</span>))</span>
+<span id="cb138-2"><a href=""></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>log2 fold change (MLE): stage L1Larvae vs L2Larvae 
+Wald test p-value: stage L1Larvae vs L2Larvae 
+DataFrame with 11342 rows and 6 columns
+             baseMean log2FoldChange     lfcSE      stat      pvalue
+            &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;
+FBgn0000008   562.467      0.0567848 0.0548496   1.03528 3.00538e-01
+FBgn0000014   894.891      0.7973618 0.0453627  17.57749 3.66458e-69
+FBgn0000015   323.316      0.8453126 0.0737835  11.45667 2.17736e-30
+FBgn0000017   862.122      0.2538049 0.0478014   5.30957 1.09885e-07
+FBgn0000018   111.781     -0.3815511 0.1121941  -3.40081 6.71864e-04
+...               ...            ...       ...       ...         ...
+FBgn0261570 1415.4046       0.215624 0.0667684   3.22943 1.24035e-03
+FBgn0261572   71.9698       2.201588 0.1526435  14.42307 3.70470e-47
+FBgn0261573  311.1002       0.311384 0.0678952   4.58624 4.51301e-06
+FBgn0261574 1477.7729       0.557713 0.0445722  12.51256 6.37404e-36
+FBgn0261575 1214.1409      -0.346767 0.0481108  -7.20769 5.69101e-13
+                   padj
+              &lt;numeric&gt;
+FBgn0000008 3.49974e-01
+FBgn0000014 2.56861e-68
+FBgn0000015 8.69793e-30
+FBgn0000017 2.25926e-07
+FBgn0000018 1.08510e-03
+...                 ...
+FBgn0261570 1.95917e-03
+FBgn0261572 1.96240e-46
+FBgn0261573 8.46405e-06
+FBgn0261574 2.79644e-35
+FBgn0261575 1.45364e-12</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="guardar-resultados" class="slide level2 smaller">
+<h2>Guardar resultados</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a><span class="fu">write.csv</span>(res, <span class="st">'data/DGE.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
-</div>
 </div>
 </div>
 </section>

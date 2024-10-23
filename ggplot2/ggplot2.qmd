@@ -2,6 +2,8 @@
 title: "ggplot2"
 subtitle: "Elegant Graphics for Data Analysis"
 author: "José Antonio López Gómez"
+execute:
+    cache: true
 format: 
     revealjs:
         theme: simple
@@ -205,4 +207,101 @@ ggplot(df, aes(x = '', y = price)) +
     geom_bar(aes(fill = clarity), stat = 'identity') +
     theme_bw() +
     coord_polar('y')
+```
+
+## Volcano Plot {.smaller}
+Vamos a realizar el volcano plot correspondiente al análisis diferencial de los datos de Drosophila melanogaster.
+Eliminamos las filas con 0 o NA values
+
+```{r}
+#| echo: true
+#| output-location: fragment
+dge <- read.csv('data/DGE.csv')
+dge <- dge[dge$padj != 0, ]
+dge <- dge[complete.cases(dge), ]
+
+head(dge)
+```
+## Volcano Plot {.smaller}
+Seleccionamos los valores de FC = 1.5 y padj = 0.05 de corte.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+padj.cutoff <- 0.0000001
+lfc.cutoff <- log2(2)
+```
+. . .
+```{r}
+dge$class <- 'none'
+dge[dge$log2FoldChange >= lfc.cutoff & dge$padj <= padj.cutoff, c('class')] <- 'UP'
+dge[dge$log2FoldChange <= -1 * lfc.cutoff & dge$padj <= padj.cutoff, c('class')] <- 'DOWN'
+
+head(dge)
+```
+## Volcano Plot {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj))) +
+    geom_point() +
+    theme_bw()
+```
+
+## Volcano Plot {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj))) +
+    geom_point() +
+    geom_hline(yintercept = -1 * log10(padj.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_vline(xintercept=c(-1 * lfc.cutoff ,lfc.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    theme_bw()
+```
+## Volcano Plot {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj))) +
+    geom_point(aes(color = class)) +
+    geom_hline(yintercept = -1 * log10(padj.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_vline(xintercept=c(-1 * lfc.cutoff ,lfc.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    theme_bw()
+```
+
+## Volcano Plot {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+colors <- c("UP"="#FC4E07", "none"="#E7B800", "DOWN"="#00AFBB")
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj))) +
+    geom_point(aes(color = class)) +
+    scale_color_manual(values = colors) +
+    geom_hline(yintercept = -1 * log10(padj.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_vline(xintercept=c(-1 * lfc.cutoff ,lfc.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    theme_bw()
+```
+## Volcano Plot {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+library(ggrepel)
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj), label = X)) +
+    geom_point(aes(color = class)) +
+    scale_color_manual(values = colors) +
+    geom_hline(yintercept = -1 * log10(padj.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_vline(xintercept=c(-1 * lfc.cutoff ,lfc.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_label_repel(data = dge[dge$class %in% c('UP', 'DOWN'), ], 
+                            size= 4, color = 'firebrick',  point.padding=unit(0.5, "lines"), max.overlaps = 20) +
+    theme_bw()
 ```

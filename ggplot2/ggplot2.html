@@ -724,6 +724,173 @@ José Antonio López Gómez
 </div>
 </div>
 </div>
+</section>
+<section id="volcano-plot" class="slide level2 smaller">
+<h2>Volcano Plot</h2>
+<p>Vamos a realizar el volcano plot correspondiente al análisis diferencial de los datos de Drosophila melanogaster. Eliminamos las filas con 0 o NA values</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>dge <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'data/DGE.csv'</span>)</span>
+<span id="cb19-2"><a href=""></a>dge <span class="ot">&lt;-</span> dge[dge<span class="sc">$</span>padj <span class="sc">!=</span> <span class="dv">0</span>, ]</span>
+<span id="cb19-3"><a href=""></a>dge <span class="ot">&lt;-</span> dge[<span class="fu">complete.cases</span>(dge), ]</span>
+<span id="cb19-4"><a href=""></a></span>
+<span id="cb19-5"><a href=""></a><span class="fu">head</span>(dge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>            X baseMean log2FoldChange      lfcSE      stat       pvalue
+1 FBgn0000008 562.4671     0.05678476 0.05484963  1.035281 3.005379e-01
+2 FBgn0000014 894.8910     0.79736178 0.04536267 17.577488 3.664583e-69
+3 FBgn0000015 323.3163     0.84531262 0.07378347 11.456666 2.177357e-30
+4 FBgn0000017 862.1217     0.25380489 0.04780142  5.309568 1.098852e-07
+5 FBgn0000018 111.7811    -0.38155105 0.11219415 -3.400811 6.718636e-04
+6 FBgn0000024 789.7766     0.91781653 0.04847174 18.935086 5.862028e-80
+          padj
+1 3.499743e-01
+2 2.568605e-68
+3 8.697926e-30
+4 2.259261e-07
+5 1.085105e-03
+6 4.626392e-79</code></pre>
+</div>
+</div>
+</section>
+<section id="volcano-plot-1" class="slide level2 smaller">
+<h2>Volcano Plot</h2>
+<p>Seleccionamos los valores de FC = 1.5 y padj = 0.05 de corte.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>padj.cutoff <span class="ot">&lt;-</span> <span class="fl">0.0000001</span></span>
+<span id="cb21-2"><a href=""></a>lfc.cutoff <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>            X baseMean log2FoldChange      lfcSE      stat       pvalue
+1 FBgn0000008 562.4671     0.05678476 0.05484963  1.035281 3.005379e-01
+2 FBgn0000014 894.8910     0.79736178 0.04536267 17.577488 3.664583e-69
+3 FBgn0000015 323.3163     0.84531262 0.07378347 11.456666 2.177357e-30
+4 FBgn0000017 862.1217     0.25380489 0.04780142  5.309568 1.098852e-07
+5 FBgn0000018 111.7811    -0.38155105 0.11219415 -3.400811 6.718636e-04
+6 FBgn0000024 789.7766     0.91781653 0.04847174 18.935086 5.862028e-80
+          padj class
+1 3.499743e-01  none
+2 2.568605e-68  none
+3 8.697926e-30  none
+4 2.259261e-07  none
+5 1.085105e-03  none
+6 4.626392e-79  none</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="volcano-plot-2" class="slide level2 smaller">
+<h2>Volcano Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb23-2"><a href=""></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="volcano-plot-3" class="slide level2 smaller">
+<h2>Volcano Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb24-2"><a href=""></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-3"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb24-4"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb24-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="volcano-plot-4" class="slide level2 smaller">
+<h2>Volcano Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb25-2"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb25-4"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb25-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb25-7"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="volcano-plot-5" class="slide level2 smaller">
+<h2>Volcano Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"UP"</span><span class="ot">=</span><span class="st">"#FC4E07"</span>, <span class="st">"none"</span><span class="ot">=</span><span class="st">"#E7B800"</span>, <span class="st">"DOWN"</span><span class="ot">=</span><span class="st">"#00AFBB"</span>)</span>
+<span id="cb26-2"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb26-3"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href=""></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
+<span id="cb26-5"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb26-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb26-8"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="volcano-plot-6" class="slide level2 smaller">
+<h2>Volcano Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb27-2"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj), <span class="at">label =</span> X)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href=""></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
+<span id="cb27-5"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb27-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb27-7"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb27-8"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb27-9"><a href=""></a>    <span class="fu">geom_label_repel</span>(<span class="at">data =</span> dge[dge<span class="sc">$</span>class <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'UP'</span>, <span class="st">'DOWN'</span>), ], </span>
+<span id="cb27-10"><a href=""></a>                            <span class="at">size=</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">'firebrick'</span>,  <span class="at">point.padding=</span><span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"lines"</span>), <span class="at">max.overlaps =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb27-11"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <div class="quarto-auto-generated-content">
 <p><img src="logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
