@@ -421,7 +421,7 @@ head(df)
 phenodata <- read.csv('data/modencodefly_phenodata.csv')
 dim(phenodata)
 
-head(phenodata, 10)
+head(phenodata, 20)
 ```
 
 ## Fenotipos seleccionados {.smaller}
