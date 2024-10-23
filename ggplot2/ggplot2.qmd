@@ -16,7 +16,7 @@ format:
 ---
 ## ¿Qué es ggplot2?
 **ggplot2** es un paquete de R para producir visualizaciones de datos. A diferencia de otros paquetes graficos, **ggplot2** usa un framework conceptual basado en la gramática de los gráficos. Esto permite crear gráficos de diferentes elementos, en lugar de estar limitados a un conjunto de gráficos predeterminados.
-Ha día de hoy es el lider indiscutible en representaciones gráficas en R.
+A día de hoy es el lider indiscutible en representaciones gráficas en R.
 
 ## Estructura
 Existen 7 elementos que se unen como un conjunto de instrucciones para dibujar un gráfico. Un gráfico presenta al menos tres elementos: Data, mapping, layer.
