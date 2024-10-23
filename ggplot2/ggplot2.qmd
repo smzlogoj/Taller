@@ -103,7 +103,15 @@ ggplot(df, aes(x = carat, y = price)) +
     theme(legend.position = 'top') +
     facet_wrap(~ cut)
 ```
+## Boxplot {.smaller}
 
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(y = price)) +
+    geom_boxplot()
+```
 ## Boxplot {.smaller}
 
 ```{r}
@@ -182,6 +190,17 @@ ggplot(df, aes(x = clarity)) +
 #| output-location: fragment
 
 ggplot(df, aes(x = clarity)) +
+    geom_bar(aes(color = clarity, fill = clarity)) +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity)) +
     geom_bar(aes(color = cut, fill = cut)) +
     theme_bw() +
     theme(legend.position = 'top')
@@ -194,6 +213,37 @@ ggplot(df, aes(x = clarity)) +
 
 ggplot(df, aes(x = clarity)) +
     geom_bar(aes(color = cut, fill = cut), position = position_dodge()) +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity, y = price)) +
+    geom_bar(color = 'navy', stat = 'identity') +
+    theme_bw()
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity, y = price)) +
+    geom_col(color = 'navy') +
+    theme_bw()
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity, y = price)) +
+    geom_bar(aes(color = cut, fill = cut), position = position_dodge(),  stat = 'identity') +
     theme_bw() +
     theme(legend.position = 'top')
 ```
@@ -223,7 +273,7 @@ dge <- dge[complete.cases(dge), ]
 head(dge)
 ```
 ## Volcano Plot {.smaller}
-Seleccionamos los valores de FC = 1.5 y padj = 0.0000001 de corte.
+Seleccionamos los valores de FC = 2 y padj = 0.0000001 de corte.
 
 ```{r}
 #| echo: true
