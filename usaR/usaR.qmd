@@ -537,11 +537,20 @@ dds
 #| echo: true
 #| output-location: fragment
 res <- results(dds, contrast = c('stage', 'L1Larvae', 'L2Larvae'))
+
+res <- lfcShrink(dds, coef="stage_L2Larvae_vs_L1Larvae", type="apeglm")
+
 res
 ```
+
+
 ## Guardar resultados {.smaller}
+Guardamos los resultados del análisis diferencial y los datos normalizados
+
 ```{r}
 #| echo: true
 #| output-location: fragment
 write.csv(res, 'data/DGE.csv')
+
+write.csv(counts(dds, normalized=TRUE), 'data/normalized_counts.csv')
 ```

@@ -737,26 +737,19 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>            X baseMean log2FoldChange      lfcSE      stat       pvalue
-1 FBgn0000008 562.4671     0.05678476 0.05484963  1.035281 3.005379e-01
-2 FBgn0000014 894.8910     0.79736178 0.04536267 17.577488 3.664583e-69
-3 FBgn0000015 323.3163     0.84531262 0.07378347 11.456666 2.177357e-30
-4 FBgn0000017 862.1217     0.25380489 0.04780142  5.309568 1.098852e-07
-5 FBgn0000018 111.7811    -0.38155105 0.11219415 -3.400811 6.718636e-04
-6 FBgn0000024 789.7766     0.91781653 0.04847174 18.935086 5.862028e-80
-          padj
-1 3.499743e-01
-2 2.568605e-68
-3 8.697926e-30
-4 2.259261e-07
-5 1.085105e-03
-6 4.626392e-79</code></pre>
+<pre><code>            X baseMean log2FoldChange      lfcSE       pvalue         padj
+1 FBgn0000008 562.4671    -0.05656922 0.05473453 3.005379e-01 3.499743e-01
+2 FBgn0000014 894.8910    -0.79584159 0.04535355 3.664583e-69 2.568605e-68
+3 FBgn0000015 323.3163    -0.84122112 0.07377132 2.177357e-30 8.697926e-30
+4 FBgn0000017 862.1217    -0.25306214 0.04781241 1.098852e-07 2.259261e-07
+5 FBgn0000018 111.7811     0.37605333 0.11157453 6.718636e-04 1.085105e-03
+6 FBgn0000024 789.7766    -0.91597718 0.04844234 5.862028e-80 4.626392e-79</code></pre>
 </div>
 </div>
 </section>
 <section id="volcano-plot-1" class="slide level2 smaller">
 <h2>Volcano Plot</h2>
-<p>Seleccionamos los valores de FC = 1.5 y padj = 0.05 de corte.</p>
+<p>Seleccionamos los valores de FC = 1.5 y padj = 0.0000001 de corte.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>padj.cutoff <span class="ot">&lt;-</span> <span class="fl">0.0000001</span></span>
 <span id="cb21-2"><a href=""></a>lfc.cutoff <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -766,21 +759,28 @@ José Antonio López Gómez
 </div>
 <div class="fragment">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>dge<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
+<span id="cb22-2"><a href=""></a>dge[dge<span class="sc">$</span>log2FoldChange <span class="sc">&gt;=</span> lfc.cutoff <span class="sc">&amp;</span> dge<span class="sc">$</span>padj <span class="sc">&lt;=</span> padj.cutoff, <span class="fu">c</span>(<span class="st">'class'</span>)] <span class="ot">&lt;-</span> <span class="st">'UP'</span></span>
+<span id="cb22-3"><a href=""></a>dge[dge<span class="sc">$</span>log2FoldChange <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff <span class="sc">&amp;</span> dge<span class="sc">$</span>padj <span class="sc">&lt;=</span> padj.cutoff, <span class="fu">c</span>(<span class="st">'class'</span>)] <span class="ot">&lt;-</span> <span class="st">'DOWN'</span></span>
+<span id="cb22-4"><a href=""></a></span>
+<span id="cb22-5"><a href=""></a><span class="fu">head</span>(dge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>            X baseMean log2FoldChange      lfcSE      stat       pvalue
-1 FBgn0000008 562.4671     0.05678476 0.05484963  1.035281 3.005379e-01
-2 FBgn0000014 894.8910     0.79736178 0.04536267 17.577488 3.664583e-69
-3 FBgn0000015 323.3163     0.84531262 0.07378347 11.456666 2.177357e-30
-4 FBgn0000017 862.1217     0.25380489 0.04780142  5.309568 1.098852e-07
-5 FBgn0000018 111.7811    -0.38155105 0.11219415 -3.400811 6.718636e-04
-6 FBgn0000024 789.7766     0.91781653 0.04847174 18.935086 5.862028e-80
-          padj class
-1 3.499743e-01  none
-2 2.568605e-68  none
-3 8.697926e-30  none
-4 2.259261e-07  none
-5 1.085105e-03  none
-6 4.626392e-79  none</code></pre>
+<pre><code>            X baseMean log2FoldChange      lfcSE       pvalue         padj
+1 FBgn0000008 562.4671    -0.05656922 0.05473453 3.005379e-01 3.499743e-01
+2 FBgn0000014 894.8910    -0.79584159 0.04535355 3.664583e-69 2.568605e-68
+3 FBgn0000015 323.3163    -0.84122112 0.07377132 2.177357e-30 8.697926e-30
+4 FBgn0000017 862.1217    -0.25306214 0.04781241 1.098852e-07 2.259261e-07
+5 FBgn0000018 111.7811     0.37605333 0.11157453 6.718636e-04 1.085105e-03
+6 FBgn0000024 789.7766    -0.91597718 0.04844234 5.862028e-80 4.626392e-79
+  class
+1  none
+2  none
+3  none
+4  none
+5  none
+6  none</code></pre>
 </div>
 </div>
 </div>
@@ -788,9 +788,9 @@ José Antonio López Gómez
 <section id="volcano-plot-2" class="slide level2 smaller">
 <h2>Volcano Plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
-<span id="cb23-2"><a href=""></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb24-2"><a href=""></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-3"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -805,13 +805,13 @@ José Antonio López Gómez
 <section id="volcano-plot-3" class="slide level2 smaller">
 <h2>Volcano Plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
-<span id="cb24-2"><a href=""></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
-<span id="cb24-4"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
-<span id="cb24-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb24-7"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb25-2"><a href=""></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-3"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb25-4"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb25-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb25-7"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -826,13 +826,13 @@ José Antonio López Gómez
 <section id="volcano-plot-4" class="slide level2 smaller">
 <h2>Volcano Plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
-<span id="cb25-2"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
-<span id="cb25-3"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
-<span id="cb25-4"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb25-5"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
-<span id="cb25-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb25-7"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb26-2"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb26-4"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb26-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -847,15 +847,15 @@ José Antonio López Gómez
 <section id="volcano-plot-5" class="slide level2 smaller">
 <h2>Volcano Plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"UP"</span><span class="ot">=</span><span class="st">"#FC4E07"</span>, <span class="st">"none"</span><span class="ot">=</span><span class="st">"#E7B800"</span>, <span class="st">"DOWN"</span><span class="ot">=</span><span class="st">"#00AFBB"</span>)</span>
-<span id="cb26-2"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
-<span id="cb26-3"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
-<span id="cb26-4"><a href=""></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
-<span id="cb26-5"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
-<span id="cb26-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb26-7"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
-<span id="cb26-8"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb26-9"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"UP"</span><span class="ot">=</span><span class="st">"#FC4E07"</span>, <span class="st">"none"</span><span class="ot">=</span><span class="st">"#E7B800"</span>, <span class="st">"DOWN"</span><span class="ot">=</span><span class="st">"#00AFBB"</span>)</span>
+<span id="cb27-2"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb27-3"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href=""></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
+<span id="cb27-5"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb27-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb27-7"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb27-8"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb27-9"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -870,17 +870,17 @@ José Antonio López Gómez
 <section id="volcano-plot-6" class="slide level2 smaller">
 <h2>Volcano Plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb27-2"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj), <span class="at">label =</span> X)) <span class="sc">+</span></span>
-<span id="cb27-3"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
-<span id="cb27-4"><a href=""></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
-<span id="cb27-5"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
-<span id="cb27-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb27-7"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
-<span id="cb27-8"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb27-9"><a href=""></a>    <span class="fu">geom_label_repel</span>(<span class="at">data =</span> dge[dge<span class="sc">$</span>class <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'UP'</span>, <span class="st">'DOWN'</span>), ], </span>
-<span id="cb27-10"><a href=""></a>                            <span class="at">size=</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">'firebrick'</span>,  <span class="at">point.padding=</span><span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"lines"</span>), <span class="at">max.overlaps =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb27-11"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb28-2"><a href=""></a><span class="fu">ggplot</span>(dge, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj), <span class="at">label =</span> X)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href=""></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb28-4"><a href=""></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
+<span id="cb28-5"><a href=""></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">log10</span>(padj.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb28-6"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb28-7"><a href=""></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> lfc.cutoff ,lfc.cutoff ), <span class="at">linetype=</span><span class="st">"dashed"</span>, </span>
+<span id="cb28-8"><a href=""></a>                              <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb28-9"><a href=""></a>    <span class="fu">geom_label_repel</span>(<span class="at">data =</span> dge[dge<span class="sc">$</span>class <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'UP'</span>, <span class="st">'DOWN'</span>), ], </span>
+<span id="cb28-10"><a href=""></a>                            <span class="at">size=</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">'firebrick'</span>,  <span class="at">point.padding=</span><span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"lines"</span>), <span class="at">max.overlaps =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb28-11"><a href=""></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -891,6 +891,163 @@ José Antonio López Gómez
 </div>
 </div>
 </div>
+</section>
+<section id="volcano-plot-7" class="slide level2 smaller">
+<h2>Volcano Plot</h2>
+
+<img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
+<section id="top-genes" class="slide level2">
+<h2>TOP Genes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>dge <span class="ot">&lt;-</span> dge[<span class="fu">order</span>(dge<span class="sc">$</span>log2FoldChange, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb29-2"><a href=""></a>genes.up <span class="ot">&lt;-</span> dge[<span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>, <span class="fu">c</span>(<span class="st">'X'</span>)]</span>
+<span id="cb29-3"><a href=""></a>genes.down <span class="ot">&lt;-</span> dge[(<span class="fu">nrow</span>(dge) <span class="sc">-</span> <span class="dv">30</span>)<span class="sc">:</span><span class="fu">nrow</span>(dge), <span class="fu">c</span>(<span class="st">'X'</span>)]</span>
+<span id="cb29-4"><a href=""></a></span>
+<span id="cb29-5"><a href=""></a>genes.up</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "FBgn0039443" "FBgn0030921" "FBgn0035865" "FBgn0030570" "FBgn0040743"
+ [6] "FBgn0039448" "FBgn0038394" "FBgn0032289" "FBgn0051626" "FBgn0051560"
+[11] "FBgn0039027" "FBgn0039264" "FBgn0031467" "FBgn0036593" "FBgn0052855"
+[16] "FBgn0003065" "FBgn0036596" "FBgn0033481" "FBgn0050471" "FBgn0031957"
+[21] "FBgn0034131" "FBgn0038439" "FBgn0051561" "FBgn0051081" "FBgn0085359"
+[26] "FBgn0051876" "FBgn0037940" "FBgn0036350" "FBgn0085250" "FBgn0035875"
+[31] "FBgn0030841" "FBgn0035685" "FBgn0037395" "FBgn0032609" "FBgn0030107"
+[36] "FBgn0039387" "FBgn0036532" "FBgn0004511" "FBgn0038002" "FBgn0029647"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>genes.down</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "FBgn0036417" "FBgn0032184" "FBgn0030830" "FBgn0005664" "FBgn0039476"
+ [6] "FBgn0050334" "FBgn0085232" "FBgn0034092" "FBgn0037288" "FBgn0038007"
+[11] "FBgn0038160" "FBgn0034828" "FBgn0031940" "FBgn0036470" "FBgn0039083"
+[16] "FBgn0085363" "FBgn0039483" "FBgn0039299" "FBgn0033404" "FBgn0035022"
+[21] "FBgn0019929" "FBgn0038148" "FBgn0038819" "FBgn0040553" "FBgn0035661"
+[26] "FBgn0052453" "FBgn0038505" "FBgn0053270" "FBgn0031276" "FBgn0037179"
+[31] "FBgn0037177"</code></pre>
+</div>
+</div>
+</section>
+<section id="top-genes-1" class="slide level2">
+<h2>TOP Genes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a>df.norm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'data/normalized_counts.csv'</span>)</span>
+<span id="cb33-2"><a href=""></a><span class="fu">head</span>(df.norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>            X  SRX008026  SRX008174 SRX008201  SRX008239 SRX008008 SRX008168
+1 FBgn0000008  577.30414  589.66391  536.2258  595.58471  560.6214  581.6257
+2 FBgn0000014 1147.76523 1197.37875 1121.8777 1217.76428  671.0268  695.3146
+3 FBgn0000015  395.03031  443.75218  452.2948  431.81641  229.7358  255.3881
+4 FBgn0000017  895.81677 1007.84392  952.1506  930.81982  780.1100  792.5268
+5 FBgn0000018   93.31425   96.27166   95.1218   97.28117  122.6359  154.8805
+6 FBgn0000024 1117.90467 1063.50098 1050.0701 1048.39706  562.2742  561.8537
+  SRX008211 SRX008255 SRX008261
+1  516.9053  536.3239  567.9487
+2  682.5334  668.7586  651.6000
+3  236.6116  256.0892  209.1284
+4  789.9186  771.1942  838.7149
+5  120.1259  118.5327  107.8662
+6  607.9097  578.7615  517.3176</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>df.norm <span class="ot">&lt;-</span> df.norm[df.norm<span class="sc">$</span>X <span class="sc">%in%</span> <span class="fu">c</span>(genes.up, genes.down), ]</span>
+<span id="cb35-2"><a href=""></a><span class="fu">rownames</span>(df.norm) <span class="ot">&lt;-</span> df.norm<span class="sc">$</span>X</span>
+<span id="cb35-3"><a href=""></a>df.norm<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb35-4"><a href=""></a><span class="fu">dim</span>(df.norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 71  9</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="heatmap" class="slide level2 smaller">
+<h2>Heatmap</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb37-2"><a href=""></a></span>
+<span id="cb37-3"><a href=""></a><span class="fu">pheatmap</span>(df.norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="heatmap-1" class="slide level2 smaller">
+<h2>Heatmap</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="fu">pheatmap</span>(df.norm,</span>
+<span id="cb38-2"><a href=""></a>        <span class="at">scale =</span> <span class="st">'row'</span></span>
+<span id="cb38-3"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="heatmap-2" class="slide level2 smaller">
+<h2>Heatmap</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">pheatmap</span>(df.norm,</span>
+<span id="cb39-2"><a href=""></a>        <span class="at">scale =</span> <span class="st">'row'</span>,</span>
+<span id="cb39-3"><a href=""></a>        <span class="at">cutree_cols =</span>  <span class="dv">2</span>,</span>
+<span id="cb39-4"><a href=""></a>        <span class="at">cutree_rows =</span> <span class="dv">2</span>,</span>
+<span id="cb39-5"><a href=""></a>        <span class="at">color =</span> <span class="fu">colorRampPalette</span>(</span>
+<span id="cb39-6"><a href=""></a>            <span class="fu">c</span>(<span class="st">"steelblue"</span>, </span>
+<span id="cb39-7"><a href=""></a>                <span class="st">"white"</span>, </span>
+<span id="cb39-8"><a href=""></a>                <span class="st">"firebrick3"</span>)</span>
+<span id="cb39-9"><a href=""></a>            )(<span class="dv">100</span>),</span>
+<span id="cb39-10"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="heatmap-3" class="slide level2 smaller">
+<h2>Heatmap</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">pheatmap</span>(df.norm,</span>
+<span id="cb40-2"><a href=""></a>        <span class="at">scale =</span> <span class="st">'row'</span>,</span>
+<span id="cb40-3"><a href=""></a>        <span class="at">cutree_cols =</span>  <span class="dv">2</span>,</span>
+<span id="cb40-4"><a href=""></a>        <span class="at">cutree_rows =</span> <span class="dv">2</span>,</span>
+<span id="cb40-5"><a href=""></a>        <span class="at">color =</span> <span class="fu">colorRampPalette</span>(</span>
+<span id="cb40-6"><a href=""></a>            <span class="fu">c</span>(<span class="st">"steelblue"</span>, </span>
+<span id="cb40-7"><a href=""></a>                <span class="st">"white"</span>, </span>
+<span id="cb40-8"><a href=""></a>                <span class="st">"firebrick3"</span>)</span>
+<span id="cb40-9"><a href=""></a>            )(<span class="dv">100</span>),</span>
+<span id="cb40-10"><a href=""></a>        <span class="at">annotation_col =</span> coldata</span>
+<span id="cb40-11"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot2_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></div>
 <div class="quarto-auto-generated-content">
 <p><img src="logo.png" class="slide-logo"></p>
 <div class="footer footer-default">

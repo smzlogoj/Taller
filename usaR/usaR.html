@@ -843,12 +843,12 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 178.7909 466.1300 466.7088 422.3071 949.2946 755.7930 506.4649 672.3373
- [9] 413.5967 421.4734</code></pre>
+<pre><code> [1] 334.3813 730.5473 197.1295 174.0930 735.2248 255.5270 880.4369 436.8652
+ [9] 723.1204 572.3233</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a>numeros[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 178.7909 949.2946 421.4734</code></pre>
+<pre><code>[1] 334.3813 735.2248 572.3233</code></pre>
 </div>
 </div>
 <ul>
@@ -859,7 +859,7 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 178.7909 466.1300 466.7088 422.3071 413.5967 421.4734</code></pre>
+<pre><code>[1] 334.3813 197.1295 174.0930 255.5270 436.8652</code></pre>
 </div>
 </div>
 </section>
@@ -1566,47 +1566,40 @@ colData names(2): stage sizeFactor</code></pre>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">results</span>(dds, <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">'stage'</span>, <span class="st">'L1Larvae'</span>, <span class="st">'L2Larvae'</span>))</span>
-<span id="cb138-2"><a href=""></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb138-2"><a href=""></a></span>
+<span id="cb138-3"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">lfcShrink</span>(dds, <span class="at">coef=</span><span class="st">"stage_L2Larvae_vs_L1Larvae"</span>, <span class="at">type=</span><span class="st">"apeglm"</span>)</span>
+<span id="cb138-4"><a href=""></a></span>
+<span id="cb138-5"><a href=""></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>log2 fold change (MLE): stage L1Larvae vs L2Larvae 
-Wald test p-value: stage L1Larvae vs L2Larvae 
-DataFrame with 11342 rows and 6 columns
-             baseMean log2FoldChange     lfcSE      stat      pvalue
-            &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;
-FBgn0000008   562.467      0.0567848 0.0548496   1.03528 3.00538e-01
-FBgn0000014   894.891      0.7973618 0.0453627  17.57749 3.66458e-69
-FBgn0000015   323.316      0.8453126 0.0737835  11.45667 2.17736e-30
-FBgn0000017   862.122      0.2538049 0.0478014   5.30957 1.09885e-07
-FBgn0000018   111.781     -0.3815511 0.1121941  -3.40081 6.71864e-04
-...               ...            ...       ...       ...         ...
-FBgn0261570 1415.4046       0.215624 0.0667684   3.22943 1.24035e-03
-FBgn0261572   71.9698       2.201588 0.1526435  14.42307 3.70470e-47
-FBgn0261573  311.1002       0.311384 0.0678952   4.58624 4.51301e-06
-FBgn0261574 1477.7729       0.557713 0.0445722  12.51256 6.37404e-36
-FBgn0261575 1214.1409      -0.346767 0.0481108  -7.20769 5.69101e-13
-                   padj
-              &lt;numeric&gt;
-FBgn0000008 3.49974e-01
-FBgn0000014 2.56861e-68
-FBgn0000015 8.69793e-30
-FBgn0000017 2.25926e-07
-FBgn0000018 1.08510e-03
-...                 ...
-FBgn0261570 1.95917e-03
-FBgn0261572 1.96240e-46
-FBgn0261573 8.46405e-06
-FBgn0261574 2.79644e-35
-FBgn0261575 1.45364e-12</code></pre>
+<pre><code>log2 fold change (MAP): stage L2Larvae vs L1Larvae 
+Wald test p-value: stage L2Larvae vs L1Larvae 
+DataFrame with 11342 rows and 5 columns
+             baseMean log2FoldChange     lfcSE      pvalue        padj
+            &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;   &lt;numeric&gt;
+FBgn0000008   562.467     -0.0565692 0.0547345 3.00538e-01 3.49974e-01
+FBgn0000014   894.891     -0.7958416 0.0453536 3.66458e-69 2.56861e-68
+FBgn0000015   323.316     -0.8412211 0.0737713 2.17736e-30 8.69793e-30
+FBgn0000017   862.122     -0.2530621 0.0478124 1.09885e-07 2.25926e-07
+FBgn0000018   111.781      0.3760533 0.1115745 6.71864e-04 1.08510e-03
+...               ...            ...       ...         ...         ...
+FBgn0261570 1415.4046      -0.214312 0.0665804 1.24035e-03 1.95917e-03
+FBgn0261572   71.9698      -2.185432 0.1527741 3.70470e-47 1.96240e-46
+FBgn0261573  311.1002      -0.309619 0.0677980 4.51301e-06 8.46405e-06
+FBgn0261574 1477.7729      -0.556479 0.0445376 6.37404e-36 2.79644e-35
+FBgn0261575 1214.1409       0.345874 0.0480085 5.69101e-13 1.45364e-12</code></pre>
 </div>
 </div>
 </div>
 </section>
 <section id="guardar-resultados" class="slide level2 smaller">
 <h2>Guardar resultados</h2>
+<p>Guardamos los resultados del análisis diferencial y los datos normalizados</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a><span class="fu">write.csv</span>(res, <span class="st">'data/DGE.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a><span class="fu">write.csv</span>(res, <span class="st">'data/DGE.csv'</span>)</span>
+<span id="cb140-2"><a href=""></a></span>
+<span id="cb140-3"><a href=""></a><span class="fu">write.csv</span>(<span class="fu">counts</span>(dds, <span class="at">normalized=</span><span class="cn">TRUE</span>), <span class="st">'data/normalized_counts.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 

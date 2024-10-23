@@ -223,7 +223,7 @@ dge <- dge[complete.cases(dge), ]
 head(dge)
 ```
 ## Volcano Plot {.smaller}
-Seleccionamos los valores de FC = 1.5 y padj = 0.05 de corte.
+Seleccionamos los valores de FC = 1.5 y padj = 0.0000001 de corte.
 
 ```{r}
 #| echo: true
@@ -233,6 +233,8 @@ lfc.cutoff <- log2(2)
 ```
 . . .
 ```{r}
+#| echo: true
+#| output-location: fragment
 dge$class <- 'none'
 dge[dge$log2FoldChange >= lfc.cutoff & dge$padj <= padj.cutoff, c('class')] <- 'UP'
 dge[dge$log2FoldChange <= -1 * lfc.cutoff & dge$padj <= padj.cutoff, c('class')] <- 'DOWN'
@@ -302,6 +304,107 @@ ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj), label = X)) +
     geom_vline(xintercept=c(-1 * lfc.cutoff ,lfc.cutoff ), linetype="dashed", 
                               color = "black", linewidth = 0.2) +
     geom_label_repel(data = dge[dge$class %in% c('UP', 'DOWN'), ], 
-                            size= 4, color = 'firebrick',  point.padding=unit(0.5, "lines"), max.overlaps = 20) +
+                            size= 4, color = 'firebrick',  point.padding=unit(0.5, "lines"), max.overlaps = 30) +
     theme_bw()
+```
+## Volcano Plot {.smaller}
+```{r}
+#| echo: false
+#| output-location: fragment
+library(ggrepel)
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj), label = X)) +
+    geom_point(aes(color = class)) +
+    scale_color_manual(values = colors) +
+    geom_hline(yintercept = -1 * log10(padj.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_vline(xintercept=c(-1 * lfc.cutoff ,lfc.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_label_repel(data = dge[dge$class %in% c('UP', 'DOWN'), ], 
+                            size= 4, color = 'firebrick',  point.padding=unit(0.5, "lines"), max.overlaps = 30) +
+    theme_bw()
+```
+## TOP Genes
+```{r}
+#| echo: true
+#| output-location: fragment
+dge <- dge[order(dge$log2FoldChange, decreasing = TRUE), ]
+genes.up <- dge[1:40, c('X')]
+genes.down <- dge[(nrow(dge) - 30):nrow(dge), c('X')]
+
+genes.up
+genes.down
+```
+## TOP Genes
+```{r}
+#| echo: true
+#| output-location: fragment
+df.norm <- read.csv('data/normalized_counts.csv')
+head(df.norm)
+```
+. . .
+```{r}
+#| echo: true
+#| output-location: fragment
+df.norm <- df.norm[df.norm$X %in% c(genes.up, genes.down), ]
+rownames(df.norm) <- df.norm$X
+df.norm$X <- NULL
+dim(df.norm)
+```
+## Heatmap {.smaller}
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 12
+library(pheatmap)
+
+pheatmap(df.norm)
+```
+## Heatmap {.smaller}
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 12
+
+pheatmap(df.norm,
+        scale = 'row'
+)
+```
+## Heatmap {.smaller}
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 12
+
+pheatmap(df.norm,
+        scale = 'row',
+        cutree_cols =  2,
+        cutree_rows = 2,
+        color = colorRampPalette(
+            c("steelblue", 
+                "white", 
+                "firebrick3")
+            )(100),
+)
+```
+## Heatmap {.smaller}
+```{r}
+coldata <- data.frame(stage = c(rep('L1Larvae', 4), rep('L2larvae', 5)))
+rownames(coldata) <- names(df.norm)
+```
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 12
+
+pheatmap(df.norm,
+        scale = 'row',
+        cutree_cols =  2,
+        cutree_rows = 2,
+        color = colorRampPalette(
+            c("steelblue", 
+                "white", 
+                "firebrick3")
+            )(100),
+        annotation_col = coldata
+)
 ```
