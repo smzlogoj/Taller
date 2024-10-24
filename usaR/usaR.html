@@ -572,6 +572,11 @@ José Antonio López Gómez
 <section id="variables-simples" class="slide level2 smaller">
 <h2>Variables simples</h2>
 <table class="caption-top">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 50%">
+<col style="width: 30%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Tipo de dato</th>
@@ -843,12 +848,12 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 676.134807 475.760465 128.697894 781.193384 574.903763 803.698998
- [7] 713.343501  52.827739   2.996863 792.638961</code></pre>
+<pre><code> [1] 103.1416 460.3529 903.0011 888.4749 227.3974 114.5297 354.6653 540.5409
+ [9] 668.8234 783.3438</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a>numeros[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 676.1348 574.9038 792.6390</code></pre>
+<pre><code>[1] 103.1416 227.3974 783.3438</code></pre>
 </div>
 </div>
 <ul>
@@ -859,7 +864,7 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 475.760465 128.697894  52.827739   2.996863</code></pre>
+<pre><code>[1] 103.1416 460.3529 227.3974 114.5297 354.6653</code></pre>
 </div>
 </div>
 </section>
@@ -1393,20 +1398,9 @@ José Antonio López Gómez
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href=""></a><span class="fu">head</span>(<span class="fu">names</span>(df) <span class="sc">%in%</span> df.fenotipos<span class="sc">$</span>sample.id, <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE FALSE FALSE</code></pre>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href=""></a>df.sub <span class="ot">&lt;-</span> df[, <span class="fu">names</span>(df) <span class="sc">%in%</span> df.fenotipos<span class="sc">$</span>sample.id]</span>
-<span id="cb118-2"><a href=""></a></span>
-<span id="cb118-3"><a href=""></a><span class="fu">head</span>(df.sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href=""></a>df.sub <span class="ot">&lt;-</span> df[, df.fenotipos<span class="sc">$</span>sample.id]</span>
+<span id="cb116-2"><a href=""></a></span>
+<span id="cb116-3"><a href=""></a><span class="fu">head</span>(df.sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1431,9 +1425,9 @@ José Antonio López Gómez
 <section id="añadir-genes" class="slide level2 smaller">
 <h2>Añadir genes</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href=""></a><span class="fu">rownames</span>(df.sub) <span class="ot">&lt;-</span> df<span class="sc">$</span>gene</span>
-<span id="cb120-2"><a href=""></a></span>
-<span id="cb120-3"><a href=""></a><span class="fu">head</span>(df.sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href=""></a><span class="fu">rownames</span>(df.sub) <span class="ot">&lt;-</span> df<span class="sc">$</span>gene</span>
+<span id="cb118-2"><a href=""></a></span>
+<span id="cb118-3"><a href=""></a><span class="fu">head</span>(df.sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1452,6 +1446,20 @@ FBgn0000015       130       350        95
 FBgn0000017       434      1054       381
 FBgn0000018        66       162        49</code></pre>
 </div>
+</div>
+</section>
+<section id="tip" class="slide level2 smaller">
+<h2><em>TIP</em></h2>
+<div class="sourceCode" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href=""></a>fenotipos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'L1Larvae'</span>, <span class="st">'L2Larvae'</span>)</span>
+<span id="cb120-2"><a href=""></a>df.fenotipos <span class="ot">&lt;-</span> phenodata[phenodata<span class="sc">$</span>stage <span class="sc">%in%</span> fenotipos, <span class="fu">c</span>(<span class="st">'sample.id'</span>, <span class="st">'stage'</span>)]</span>
+<span id="cb120-3"><a href=""></a></span>
+<span id="cb120-4"><a href=""></a>df.sub <span class="ot">&lt;-</span> df[, df.fenotipos<span class="sc">$</span>sample.id]</span>
+<span id="cb120-5"><a href=""></a><span class="fu">rownames</span>(df.sub) <span class="ot">&lt;-</span> df<span class="sc">$</span>gene</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<h4 id="no-es-más-sencillo">¿No es más sencillo?</h4>
+<div class="sourceCode" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href=""></a>df.sub <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">'SRX008026'</span>, <span class="st">'SRX008174 '</span>, <span class="st">'SRX008201'</span>, <span class="st">'SRX008239'</span>, <span class="st">'SRX008008 '</span>, </span>
+<span id="cb121-2"><a href=""></a>                 <span class="st">' SRX008168'</span>, <span class="st">'SRX008211'</span>, <span class="st">'SRX008255'</span>, <span class="st">'SRX008261'</span>)]</span>
+<span id="cb121-3"><a href=""></a><span class="fu">rownames</span>(df.sub) <span class="ot">&lt;-</span> df<span class="sc">$</span>gene</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="eliminar-genes-con-pocas-counts" class="slide level2 smaller">
