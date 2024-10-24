@@ -402,6 +402,10 @@ aggregate(df[, c(1:4)], by = list(Species = df$Species), FUN = sd)
 ```
 ## Drosophila melanogaster {.smaller}
 Vamos a realizar un análisis de expresíon diferencial  con el conjunto de datos *modencodefly* de la Drosophila melanogaster.
+![](FlowChart.png){width=80%}
+
+## Raw counts {.smaller}
+
 
 ```{r}
 #| echo: true
@@ -537,9 +541,6 @@ dds
 #| echo: true
 #| output-location: fragment
 res <- results(dds, contrast = c('stage', 'L1Larvae', 'L2Larvae'))
-
-res <- lfcShrink(dds, coef="stage_L2Larvae_vs_L1Larvae", type="apeglm")
-
 res
 ```
 
